@@ -1,6 +1,6 @@
 # Letlink — Official Launch Countdown
 
-A modern, responsive launch countdown landing page for **Letlink**, counting down to **29 October 2026 at 10:00 AM IST (UTC+05:30)**.
+A modern, responsive launch countdown landing page for **Letlink**, counting down to **29 October 2026 at 11:00 AM IST (UTC+05:30)**.
 
 ---
 
@@ -27,8 +27,8 @@ A modern, responsive launch countdown landing page for **Letlink**, counting dow
 
 ## ⏱️ Target Launch Details
 
-- **Target ISO Timestamp**: `2026-10-29T10:00:00+05:30`
-- **Target UTC**: `2026-10-29T04:30:00.000Z`
+- **Target ISO Timestamp**: `2026-10-29T11:00:00+05:30`
+- **Target UTC**: `2026-10-29T05:30:00.000Z`
 - **Reference Timezone**: Indian Standard Time (IST / UTC+05:30)
 - **Live Units**: Days, Hours, Minutes, Seconds (zero-padded)
 

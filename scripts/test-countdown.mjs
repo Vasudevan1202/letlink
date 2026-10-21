@@ -1,7 +1,7 @@
 import assert from "node:assert";
 
 // Target launch date
-const TARGET_LAUNCH_DATE = "2026-10-29T10:00:00+05:30";
+const TARGET_LAUNCH_DATE = "2026-10-29T11:00:00+05:30";
 const targetTimeMs = new Date(TARGET_LAUNCH_DATE).getTime();
 
 console.log("=== Letlink Countdown Verification ===");
@@ -9,8 +9,8 @@ console.log("Target ISO:", TARGET_LAUNCH_DATE);
 console.log("Target UTC string:", new Date(targetTimeMs).toUTCString());
 console.log("Target Unix Epoch (ms):", targetTimeMs);
 
-// Check UTC equivalent: 10:00 AM IST (UTC+5:30) is 04:30 AM UTC on 2026-10-29
-assert.strictEqual(new Date(targetTimeMs).toISOString(), "2026-10-29T04:30:00.000Z");
+// Check UTC equivalent: 11:00 AM IST (UTC+5:30) is 05:30 AM UTC on 2026-10-29
+assert.strictEqual(new Date(targetTimeMs).toISOString(), "2026-10-29T05:30:00.000Z");
 
 function calculateTimeRemaining(targetMs, currentMs) {
   const totalMilliseconds = targetMs - currentMs;
@@ -46,13 +46,13 @@ const res1 = calculateTimeRemaining(targetTimeMs, simulatedNow);
 console.log("\nTest 1 (2026-10-20 19:41:30 IST):", res1);
 assert.strictEqual(res1.isComplete, false);
 assert.strictEqual(res1.days, 8);
-assert.strictEqual(res1.hours, 14);
+assert.strictEqual(res1.hours, 15);
 assert.strictEqual(res1.minutes, 18);
 assert.strictEqual(res1.seconds, 30);
-console.log("✓ Test 1 Passed: 8d 14h 18m 30s remaining");
+console.log("✓ Test 1 Passed: 8d 15h 18m 30s remaining");
 
-// Test 2: Exactly 1 second before launch: 2026-10-29T09:59:59+05:30
-const oneSecBefore = new Date("2026-10-29T09:59:59+05:30").getTime();
+// Test 2: Exactly 1 second before launch: 2026-10-29T10:59:59+05:30
+const oneSecBefore = new Date("2026-10-29T10:59:59+05:30").getTime();
 const res2 = calculateTimeRemaining(targetTimeMs, oneSecBefore);
 console.log("\nTest 2 (1 second before):", res2);
 assert.strictEqual(res2.isComplete, false);
@@ -62,8 +62,8 @@ assert.strictEqual(res2.minutes, 0);
 assert.strictEqual(res2.seconds, 1);
 console.log("✓ Test 2 Passed: 0d 0h 0m 1s remaining");
 
-// Test 3: Exactly launch moment: 2026-10-29T10:00:00+05:30
-const atLaunch = new Date("2026-10-29T10:00:00+05:30").getTime();
+// Test 3: Exactly launch moment: 2026-10-29T11:00:00+05:30
+const atLaunch = new Date("2026-10-29T11:00:00+05:30").getTime();
 const res3 = calculateTimeRemaining(targetTimeMs, atLaunch);
 console.log("\nTest 3 (Exact launch time):", res3);
 assert.strictEqual(res3.isComplete, true);

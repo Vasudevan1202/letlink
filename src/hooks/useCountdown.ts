@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { TimeRemaining } from "@/types/countdown";
 
-export const TARGET_LAUNCH_DATE = "2026-10-29T10:00:00+05:30";
+export const TARGET_LAUNCH_DATE = "2026-10-29T11:00:00+05:30";
 
 export function calculateTimeRemaining(
   targetTimestampMs: number,

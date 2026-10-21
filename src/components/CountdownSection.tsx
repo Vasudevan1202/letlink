@@ -37,7 +37,7 @@ export function CountdownSection({ overrideComplete }: CountdownSectionProps) {
       {/* Launch Date Pill Badge */}
       <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 sm:mb-8 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
         <Calendar className="w-3.5 h-3.5 text-blue-400" />
-        <span>29 OCTOBER 2026 &middot; 10:00 AM IST</span>
+        <span>29 OCTOBER 2026 &middot; 11:00 AM IST</span>
       </div>
 
       {/* Main Heading */}
@@ -58,7 +58,7 @@ export function CountdownSection({ overrideComplete }: CountdownSectionProps) {
       {/* Subtle Launch Reference note */}
       <div className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-400">
         <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-        <span>Target: 29 October 2026 at 10:00 AM IST (UTC+05:30)</span>
+        <span>Target: 29 October 2026 at 11:00 AM IST (UTC+05:30)</span>
       </div>
     </div>
   );
