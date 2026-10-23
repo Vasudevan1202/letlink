@@ -40,16 +40,27 @@ function calculateTimeRemaining(targetMs, currentMs) {
   };
 }
 
-// Test 1: Current local time: 2026-10-20T19:41:30+05:30
-const simulatedNow = new Date("2026-10-20T19:41:30+05:30").getTime();
-const res1 = calculateTimeRemaining(targetTimeMs, simulatedNow);
-console.log("\nTest 1 (2026-10-20 19:41:30 IST):", res1);
-assert.strictEqual(res1.isComplete, false);
-assert.strictEqual(res1.days, 8);
-assert.strictEqual(res1.hours, 15);
-assert.strictEqual(res1.minutes, 18);
-assert.strictEqual(res1.seconds, 30);
-console.log("✓ Test 1 Passed: 8d 15h 18m 30s remaining");
+// Test 1A: Historical time: 2026-10-20T19:41:30+05:30
+const simulatedOct20 = new Date("2026-10-20T19:41:30+05:30").getTime();
+const res1a = calculateTimeRemaining(targetTimeMs, simulatedOct20);
+console.log("\nTest 1A (2026-10-20 19:41:30 IST):", res1a);
+assert.strictEqual(res1a.isComplete, false);
+assert.strictEqual(res1a.days, 8);
+assert.strictEqual(res1a.hours, 15);
+assert.strictEqual(res1a.minutes, 18);
+assert.strictEqual(res1a.seconds, 30);
+console.log("✓ Test 1A Passed: 8d 15h 18m 30s remaining");
+
+// Test 1B: Current local time: 2026-10-23T19:41:14+05:30
+const simulatedOct23 = new Date("2026-10-23T19:41:14+05:30").getTime();
+const res1b = calculateTimeRemaining(targetTimeMs, simulatedOct23);
+console.log("\nTest 1B (2026-10-23 19:41:14 IST):", res1b);
+assert.strictEqual(res1b.isComplete, false);
+assert.strictEqual(res1b.days, 5);
+assert.strictEqual(res1b.hours, 15);
+assert.strictEqual(res1b.minutes, 18);
+assert.strictEqual(res1b.seconds, 46);
+console.log("✓ Test 1B Passed: 5d 15h 18m 46s remaining");
 
 // Test 2: Exactly 1 second before launch: 2026-10-29T10:59:59+05:30
 const oneSecBefore = new Date("2026-10-29T10:59:59+05:30").getTime();

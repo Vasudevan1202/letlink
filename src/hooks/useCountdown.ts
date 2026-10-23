@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { TimeRemaining } from "@/types/countdown";
 
 export const TARGET_LAUNCH_DATE = "2026-10-29T11:00:00+05:30";
@@ -44,14 +44,14 @@ interface UseCountdownOptions {
 
 export function useCountdown(options?: UseCountdownOptions) {
   const targetIso = options?.targetDate || TARGET_LAUNCH_DATE;
-  const targetTimeMs = new Date(targetIso).getTime();
+  const targetTimeMs = useMemo(() => new Date(targetIso).getTime(), [targetIso]);
 
   const [mounted, setMounted] = useState<boolean>(false);
   const [isForcedComplete, setIsForcedComplete] = useState<boolean>(
     options?.forceComplete ?? false
   );
 
-  // Initialize with real calculated time so SSR and initial paint display real numbers immediately
+  // Initialize with real calculated time
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(() => {
     if (options?.forceComplete) {
       return {
@@ -96,6 +96,7 @@ export function useCountdown(options?: UseCountdownOptions) {
 
   useEffect(() => {
     setMounted(true);
+    // Immediately calculate upon client mount to guarantee real-time accuracy
     const complete = tick();
 
     if (complete) {
@@ -109,8 +110,19 @@ export function useCountdown(options?: UseCountdownOptions) {
       }
     }, 1000);
 
+    const handleVisibilityChange = () => {
+      if (typeof document !== "undefined" && document.visibilityState === "visible") {
+        tick();
+      }
+    };
+
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", tick);
+
     return () => {
       window.clearInterval(intervalId);
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", tick);
     };
   }, [tick]);
 

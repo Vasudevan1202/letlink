@@ -11,14 +11,23 @@ interface CountdownSectionProps {
 }
 
 export function CountdownSection({ overrideComplete }: CountdownSectionProps) {
-  // Clear any obsolete service workers previously registered on localhost
+  // Clear any obsolete service workers or caches previously registered on localhost
   useEffect(() => {
-    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-      navigator.serviceWorker.getRegistrations().then((registrations) => {
-        for (const registration of registrations) {
-          registration.unregister();
-        }
-      });
+    if (typeof window !== "undefined") {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+      if ("caches" in window) {
+        caches.keys().then((names) => {
+          for (const name of names) {
+            caches.delete(name);
+          }
+        });
+      }
     }
   }, []);
 
@@ -52,7 +61,10 @@ export function CountdownSection({ overrideComplete }: CountdownSectionProps) {
 
       {/* Countdown Cards */}
       <div className="w-full mb-8 sm:mb-10">
-        <CountdownTimer timeRemaining={countdown} />
+        <CountdownTimer
+          timeRemaining={countdown}
+          mounted={countdown.mounted}
+        />
       </div>
 
       {/* Subtle Launch Reference note */}

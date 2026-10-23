@@ -37,7 +37,6 @@ function CountdownCard({ value, label }: CountdownUnitProps) {
       <span
         className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-mono tracking-tight text-white tabular-nums select-none drop-shadow-sm"
         aria-hidden="true"
-        suppressHydrationWarning
       >
         {formattedValue}
       </span>
@@ -48,14 +47,14 @@ function CountdownCard({ value, label }: CountdownUnitProps) {
       </span>
 
       {/* Accessible screen reader announcement */}
-      <span className="sr-only" suppressHydrationWarning>
+      <span className="sr-only">
         {value} {label}
       </span>
     </div>
   );
 }
 
-export function CountdownTimer({ timeRemaining }: CountdownTimerProps) {
+export function CountdownTimer({ timeRemaining, mounted }: CountdownTimerProps) {
   const units = [
     { label: "Days", value: timeRemaining.days },
     { label: "Hours", value: timeRemaining.hours },
@@ -65,6 +64,7 @@ export function CountdownTimer({ timeRemaining }: CountdownTimerProps) {
 
   return (
     <div
+      key={mounted ? "timer-live" : "timer-static"}
       className="w-full max-w-2xl mx-auto px-1 sm:px-0"
       role="timer"
       aria-label="Launch Countdown"
